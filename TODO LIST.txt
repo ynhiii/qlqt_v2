@@ -1,0 +1,14 @@
+TODO LIST:
+1. Bảng Thuoc:
+	Thay TenNSX thành MaNSX 
+	=> Sửa lại bản ghi
+2. Bảng HoaDonNhap:
+	Thay NguoiNhan thành MaNguoiNhan
+	Bỏ TenNsx, DiaChi, DienThoai, TenThuoc (Chuẩn 3) 
+	=> Sửa lại bản ghi
+3. Bang HoaDonXuat 
+	Thay TenBN -> MaBN
+	Them MaNguoiBan
+	Bỏ DiaChi, Dien Thoai, TenThuoc, GiaBan (3nf)
+	=> Sửa lại bản ghi
+4. Thêm bảng PhongBan, NhanVien
