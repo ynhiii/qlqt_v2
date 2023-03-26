@@ -1,5 +1,3 @@
-USE QLQT;
-
 CREATE TABLE dbo.NhomThuoc (
   MaNhom bigint IDENTITY (1, 1) NOT NULL PRIMARY KEY,
   TenNhom nvarchar(max) NOT NULL,
@@ -45,7 +43,7 @@ CREATE TABLE dbo.Thuoc (
   BaoQuan nvarchar(max) DEFAULT NULL,
   DangBaoChe nvarchar(max) DEFAULT NULL,
   CachDung nvarchar(max) DEFAULT NULL,
-  Kho int NOT NULL,
+  Kho int DEFAULT (100),
   --Relationship
   CONSTRAINT FK_Thuoc_NhomThuoc FOREIGN KEY(MaNhom) REFERENCES NhomThuoc(MaNhom),
   CONSTRAINT FK_Thuoc_NSX FOREIGN KEY(MaNSX) REFERENCES NhaSanXuat(MaNSX),
@@ -107,6 +105,7 @@ CREATE TABLE dbo.HoaDonXuat (
   GhiChu nvarchar(max) DEFAULT NULL,
   NgayLap datetime NOT NULL,
   --Relationship
+  CONSTRAINT FK_HoaDonXuat_Thuoc FOREIGN KEY(MaThuoc) REFERENCES Thuoc(MaThuoc)
   CONSTRAINT FK_HoaDonXuat_BenhNhan FOREIGN KEY(MaBN) REFERENCES BenhNhan(MaBN),
   CONSTRAINT FK_HoaDonXuat_NhanVien FOREIGN KEY(MaNguoiBan) REFERENCES NhanVien(MaNV)
 );
