@@ -1,4 +1,4 @@
-﻿USE QLQT;
+﻿USE QLQT; -- Chỉ định bảng thực hiện query -> không phải click phải vào QLQT -> New query nữa
 
 -- Reset Table
 IF OBJECT_ID('HoaDonNhap','U') IS NOT NULL
