@@ -155,6 +155,7 @@ CREATE TABLE dbo.HoaDonXuat (
   GhiChu nvarchar(max) DEFAULT NULL,
   NgayLap datetime NOT NULL,
   --Relationship
+  CONSTRAINT FK_HoaDonXuat_Thuoc FOREIGN KEY(MaThuoc) REFERENCES Thuoc(MaThuoc)
   CONSTRAINT FK_HoaDonXuat_BenhNhan FOREIGN KEY(MaBN) REFERENCES BenhNhan(MaBN),
   CONSTRAINT FK_HoaDonXuat_NhanVien FOREIGN KEY(MaNguoiBan) REFERENCES NhanVien(MaNV)
 );
