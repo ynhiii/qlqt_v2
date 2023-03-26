@@ -1,4 +1,6 @@
-﻿-- Reset Table
+﻿USE QLQT;
+
+-- Reset Table
 IF OBJECT_ID('HoaDonNhap','U') IS NOT NULL
 BEGIN
 	ALTER TABLE HoaDonNhap DROP CONSTRAINT FK_HoaDonNhap_Thuoc;
@@ -47,117 +49,117 @@ BEGIN
 END;
 
 CREATE TABLE dbo.NhomThuoc (
-  MaNhom bigint IDENTITY (1, 1) NOT NULL PRIMARY KEY, 
-  TenNhom nvarchar(max) NOT NULL, 
+  MaNhom bigint IDENTITY (1, 1) NOT NULL PRIMARY KEY,
+  TenNhom nvarchar(max) NOT NULL,
   );
 CREATE TABLE dbo.NhaSanXuat (
-  MaNSX bigint IDENTITY (1, 1) NOT NULL PRIMARY KEY, 
-  TenNSX nvarchar(max), 
-  DiaChi nvarchar(max), 
-  DienThoai nvarchar(max), 
-  Email nvarchar(max), 
-  SoLoSX varchar(255), 
+  MaNSX bigint IDENTITY (1, 1) NOT NULL PRIMARY KEY,
+  TenNSX nvarchar(max),
+  DiaChi nvarchar(max),
+  DienThoai nvarchar(max),
+  Email nvarchar(max),
+  SoLoSX varchar(255),
   GhiChu nvarchar(max) DEFAULT NULL
 );
 CREATE TABLE dbo.BenhNhan (
-  MaBN nvarchar(255) PRIMARY KEY NOT NULL, 
-  Ten nvarchar(max) NOT NULL, 
-  Tuoi int NOT NULL, 
-  DiaChi nvarchar(max) DEFAULT NULL, 
-  GioiTinh nvarchar(max) NOT NULL, 
-  NgheNghiep nvarchar(max) DEFAULT NULL, 
-  CCCD varchar(13) DEFAULT NULL, 
-  SDT varchar(11) DEFAULT NULL, 
-  DiaChiKhiCanLienHe nvarchar(max) DEFAULT NULL, 
-  SDTNguoiNha varchar(11) DEFAULT NULL, 
+  MaBN nvarchar(255) PRIMARY KEY NOT NULL,
+  Ten nvarchar(max) NOT NULL,
+  Tuoi int NOT NULL,
+  DiaChi nvarchar(max) DEFAULT NULL,
+  GioiTinh nvarchar(max) NOT NULL,
+  NgheNghiep nvarchar(max) DEFAULT NULL,
+  CCCD varchar(13) DEFAULT NULL,
+  SDT varchar(11) DEFAULT NULL,
+  DiaChiKhiCanLienHe nvarchar(max) DEFAULT NULL,
+  SDTNguoiNha varchar(11) DEFAULT NULL,
   );
 CREATE TABLE PhongBan (
-  MaPB bigint IDENTITY (1, 1) NOT NULL PRIMARY KEY, 
-  TenPB nvarchar(max) NOT NULL, 
+  MaPB bigint IDENTITY (1, 1) NOT NULL PRIMARY KEY,
+  TenPB nvarchar(max) NOT NULL,
   );
 CREATE TABLE dbo.Thuoc (
-  MaThuoc nvarchar(255) NOT NULL PRIMARY KEY, 
-  TenThuoc nvarchar(max) NOT NULL, 
-  MaNhom BigInt NOT NULL, 
-  NguonGoc nvarchar(max) NOT NULL, 
-  MaNSX bigint NOT NULL, 
-  SoLuong nvarchar(max) NOT NULL, 
-  GiaBan int NOT NULL, 
-  TenDVT nvarchar(max) DEFAULT NULL, 
-  ThanhPhan nvarchar(max), 
-  CongDung nvarchar(max), 
-  ChuY nvarchar(max), 
-  HSD nvarchar(max) DEFAULT NULL, 
-  BaoQuan nvarchar(max) DEFAULT NULL, 
-  DangBaoChe nvarchar(max) DEFAULT NULL, 
-  CachDung nvarchar(max) DEFAULT NULL, 
-  Kho int DEFAULT (100), 
+  MaThuoc nvarchar(255) NOT NULL PRIMARY KEY,
+  TenThuoc nvarchar(max) NOT NULL,
+  MaNhom BigInt NOT NULL,
+  NguonGoc nvarchar(max) NOT NULL,
+  MaNSX bigint NOT NULL,
+  SoLuong nvarchar(max) NOT NULL,
+  GiaBan int NOT NULL,
+  TenDVT nvarchar(max) DEFAULT NULL,
+  ThanhPhan nvarchar(max),
+  CongDung nvarchar(max),
+  ChuY nvarchar(max),
+  HSD nvarchar(max) DEFAULT NULL,
+  BaoQuan nvarchar(max) DEFAULT NULL,
+  DangBaoChe nvarchar(max) DEFAULT NULL,
+  CachDung nvarchar(max) DEFAULT NULL,
+  Kho int DEFAULT (100),
   --Relationship
-  CONSTRAINT FK_Thuoc_NhomThuoc FOREIGN KEY(MaNhom) REFERENCES NhomThuoc(MaNhom), 
-  CONSTRAINT FK_Thuoc_NSX FOREIGN KEY(MaNSX) REFERENCES NhaSanXuat(MaNSX), 
+  CONSTRAINT FK_Thuoc_NhomThuoc FOREIGN KEY(MaNhom) REFERENCES NhomThuoc(MaNhom),
+  CONSTRAINT FK_Thuoc_NSX FOREIGN KEY(MaNSX) REFERENCES NhaSanXuat(MaNSX),
   );
 CREATE TABLE NhanVien (
-  MaNV NVARCHAR(255) PRIMARY KEY NOT NULL, 
-  TenNV NVARCHAR(255) NOT NULL, 
-  NgaySinh DATE NOT NULL, 
+  MaNV NVARCHAR(255) PRIMARY KEY NOT NULL,
+  TenNV NVARCHAR(255) NOT NULL,
+  NgaySinh DATE NOT NULL,
   GioiTinh int NOT NULL, -- Nam:0, Nu:1
-  DienThoai VARCHAR(15) DEFAULT NULL, 
-  DiaChi NVARCHAR(255) DEFAULT NULL, 
-  Email VARCHAR(255) DEFAULT NULL, 
-  Luong int NOT NULL, 
-  NgayVaoLam date NOT NULL, 
-  MaPB BigInt NOT NULL, 
+  DienThoai VARCHAR(15) DEFAULT NULL,
+  DiaChi NVARCHAR(255) DEFAULT NULL,
+  Email VARCHAR(255) DEFAULT NULL,
+  Luong int NOT NULL,
+  NgayVaoLam date NOT NULL,
+  MaPB BigInt NOT NULL,
   --Relationship
-  CONSTRAINT FK_NhanVien_PhongBan FOREIGN KEY (MaPB) REFERENCES PhongBan(MaPB), 
+  CONSTRAINT FK_NhanVien_PhongBan FOREIGN KEY (MaPB) REFERENCES PhongBan(MaPB),
   );
 CREATE TABLE dbo.HoaDonNhap (
-  MaHDN varchar(255) NOT NULL PRIMARY KEY, 
-  NguoiGiao nvarchar(max) NOT NULL, 
-  MaNguoiNhan NVARCHAR(255) NOT NULL, 
-  MaThuoc nvarchar(255) NOT NULL, 
-  SoLuongNhap int NOT NULL, 
-  Thue decimal(10, 2) NOT NULL, 
+  MaHDN varchar(255) NOT NULL PRIMARY KEY,
+  NguoiGiao nvarchar(max) NOT NULL,
+  MaNguoiNhan NVARCHAR(255) NOT NULL,
+  MaThuoc nvarchar(255) NOT NULL,
+  SoLuongNhap int NOT NULL,
+  Thue decimal(10, 2) NOT NULL,
   GiaThuoc decimal(10, 2) NOT NULL,
   TongTienThuoc AS (
     dbo.calc_price(GiaThuoc, SoLuongNhap)
-  ), 
+  ),
   TongThue AS (
     dbo.calc_tax(GiaThuoc, SoLuongNhap, Thue)
-  ), 
+  ),
   TongTienHD AS (
     dbo.calc_total(GiaThuoc, SoLuongNhap, Thue)
-  ), 
-  NgayViet datetime NOT NULL, 
+  ),
+  NgayViet datetime NOT NULL,
   NgayNhap datetime NOT NULL,
   --Relationship
-  CONSTRAINT FK_HoaDonNhap_Thuoc FOREIGN KEY(MaThuoc) REFERENCES Thuoc(MaThuoc), 
-  CONSTRAINT FK_HoaDonNhap_NhanVien FOREIGN KEY(MaNguoiNhan) REFERENCES NhanVien(MaNV), 
+  CONSTRAINT FK_HoaDonNhap_Thuoc FOREIGN KEY(MaThuoc) REFERENCES Thuoc(MaThuoc),
+  CONSTRAINT FK_HoaDonNhap_NhanVien FOREIGN KEY(MaNguoiNhan) REFERENCES NhanVien(MaNV),
   );
 CREATE TABLE dbo.HoaDonXuat (
-  MaHDX varchar(255) PRIMARY KEY NOT NULL, 
-  MaThuoc nvarchar(255) NOT NULL, 
-  MaBN nvarchar(255) NOT NULL, 
+  MaHDX varchar(255) PRIMARY KEY NOT NULL,
+  MaThuoc nvarchar(255) NOT NULL,
+  MaBN nvarchar(255) NOT NULL,
   GiaBan int NOT NULL,
-  MaNguoiBan NVARCHAR(255) NOT NULL, 
-  SoLuongXuat int NOT NULL, 
-  Thue decimal(10, 2) NOT NULL,  
+  MaNguoiBan NVARCHAR(255) NOT NULL,
+  SoLuongXuat int NOT NULL,
+  Thue decimal(10, 2) NOT NULL,
   TongTienThuoc AS (
     dbo.calc_price(GiaBan, SoLuongXuat)
-  ), 
+  ),
   TongThue AS (
     dbo.calc_tax(GiaBan, SoLuongXuat, Thue)
-  ), 
+  ),
   TongTienHD AS (
     dbo.calc_total(GiaBan, SoLuongXuat, Thue)
-  ), 
-  GhiChu nvarchar(max) DEFAULT NULL, 
-  NgayLap datetime NOT NULL, 
+  ),
+  GhiChu nvarchar(max) DEFAULT NULL,
+  NgayLap datetime NOT NULL,
   --Relationship
   CONSTRAINT FK_HoaDonXuat_BenhNhan FOREIGN KEY(MaBN) REFERENCES BenhNhan(MaBN),
   CONSTRAINT FK_HoaDonXuat_NhanVien FOREIGN KEY(MaNguoiBan) REFERENCES NhanVien(MaNV)
 );
 
-INSERT INTO NhomThuoc (TenNhom) VALUES 
+INSERT INTO NhomThuoc (TenNhom) VALUES
 	(N'Thuốc cơ xương khớp'),
 	(N'Thuốc giảm đau – hạ sốt'),
 	(N'Thuốc ho cảm'),
@@ -168,7 +170,7 @@ INSERT INTO NhomThuoc (TenNhom) VALUES
 	(N'Thuốc tim'),
 	(N'Thuốc bổ thận');
 
-INSERT INTO NhaSanXuat (TenNSX, DiaChi, DienThoai, Email, SoLoSX, GhiChu) VALUES 
+INSERT INTO NhaSanXuat (TenNSX, DiaChi, DienThoai, Email, SoLoSX, GhiChu) VALUES
 	(N'Traphaco', N'75 Yên Ninh, Ba Đình, HN', '18006612', 'info@traphaco.com.vn', 'VD-19621-13', ''),
 	(N'Sao Thái Dương', N'Lô CC1-III.13.4 thuộc dự án khu đô thị mới Pháp Vân, Tứ Hiệp, P. Hoàng Liệt, Q. Hoàng Mai, HN', '1800 1799', 'nobel@thaiduong.com.vn', '11759/2020/ĐKSP', ''),
 	(N'DHG Pharma', N'288 Bis Nguyễn Văn Cừ, P. An Hòa, Q. Ninh Kiều, Cần Thơ', '3891433 ', 'dhgpharma@dhgpharma.com.vn', 'VD-20546-14', ''),
@@ -207,17 +209,17 @@ INSERT INTO BenhNhan (MaBN, Ten, Tuoi, DiaChi, GioiTinh, NgheNghiep, CCCD, SDT, 
 	('BN-019', N'Hoàng Anh Giang', 28, N'Yên Hoà, Cầu Giấy, HN', N' Nam', N'Giáo viên', '023588473898', '0238584938', N'Yên Hoà, Cầu Giấy, HN', '0234737583'),
 	('BN-020', N'Lê Thanh Tâm', 34, N'19 P. Tố Hữu, Vạn Phúc, Hà Đông, HN', N'Nữ', N'Kế toán', '023488578730', '0234837823', N'19 P. Tố Hữu, Vạn Phúc, Hà Đông, HN', '0238437823');
 
-INSERT INTO PhongBan (TenPB) VALUES 
+INSERT INTO PhongBan (TenPB) VALUES
 	(N'Nhân viên kho'),
 	(N'Giám đốc'),
 	(N'Kế toán'),
 	(N'Lao công'),
 	(N'Shipper'),
 	(N'Quản lí'),
-	(N'Dược sĩ'), 
+	(N'Dược sĩ'),
 	(N'Thư kí');
 
-INSERT INTO NhanVien (MaNV, TenNV, NgaySinh, GioiTinh, DienThoai, DiaChi, Email, Luong, NgayVaoLam, MaPB) VALUES 
+INSERT INTO NhanVien (MaNV, TenNV, NgaySinh, GioiTinh, DienThoai, DiaChi, Email, Luong, NgayVaoLam, MaPB) VALUES
 	('NV-01', 'Vũ Văn Hiệp', '1998-12-09', 0, '0447289838', '19 Nguyễn Trãi, Ngã Tư Sở, Thanh Xuân, HN', 'Vuvanhiep1209@gmail.com', 5600000, '2020-03-23', 1),
 	('NV-02', 'Nguyễn Thu Thủy', '1994-04-25', 1, '0236476723', 'Trung Văn, Nam Từ Liêm, HN', 'ntt25@gmail.com', 6000000, '2020-05-19', 1),
 	('NV-03', 'Phan Minh Tuấn', '1986-11-30', 0, '0234784983', 'Nhân Chính, Thanh Xuân, HN', 'panmintuan@gmail.com', 12400000, '2014-12-27', 2),
@@ -238,8 +240,8 @@ INSERT INTO NhanVien (MaNV, TenNV, NgaySinh, GioiTinh, DienThoai, DiaChi, Email,
 	('NV-18', 'Lê Thị Tuyết', '1994-07-12', 1, '0982487101', '88 Ng. 173 Đ. Hoàng Hoa Thám, Ngọc Hồ, Ba Đình, HN', 'lethit@gmail.com', 7400000, '2018-02-17', 6),
 	('NV-19', 'Phan Thị Trang', '1999-10-26', 1, '0238490193', '2 P. Trần Quốc Hoàn, Dịch Vọng Hậu, Cầu Giấy, HN', 'phanthit@gmail.com', 5700000, '2020-02-19', 1),
 	('NV-20', 'Lê Thị Tuấn Trinh', '1998-05-18', 1, '0823499019', '143 Ngõ 143 P. Quan Hoa, Quan Hoa, Cầu Giấy, HN', 'tuantrinh@gmail.com', 6700000, '2019-08-30', 3);
-		
-INSERT INTO Thuoc (MaThuoc, TenThuoc, MaNhom, NguonGoc, MaNSX, SoLuong, GiaBan, TenDVT, ThanhPhan, CongDung, ChuY, HSD, BaoQuan, DangBaoChe, CachDung, Kho) VALUES 
+
+INSERT INTO Thuoc (MaThuoc, TenThuoc, MaNhom, NguonGoc, MaNSX, SoLuong, GiaBan, TenDVT, ThanhPhan, CongDung, ChuY, HSD, BaoQuan, DangBaoChe, CachDung, Kho) VALUES
 	(N'VD-20551-14 ', N'DICLOFENAC DHG', 1, N'Việt Nam', 3, N'10viên/vỉ x10', 50000, N'viên', N'-Thành phần hoạt chất: Diclofenac natri ................. 50 mg. -Thành phần tá dược: Colloidal silicon dioxyd, đường trắng, microcrystalline cellulose M101, gelatin, lactose monohydrat, magnesi stearat, natri starch glycolat, talc, tinh bột sắn, eudragit L100, polyethylen glycol 6000, titan dioxyd, màu cam E110, oxyd sắt đỏ, oxyd sắt đen. ', N'Điều trị viêm, đau trong các trường hợp: - Rối loạn cơ xương và khớp như: viêm khớp dạng thấp, viêm xương khớp, các dạng viêm và thoái hóa tiến triển của thấp khớp, các hội chứng đau của cột sống, thoái hóa đốt sống cứng khớp, đau nhức do trật khớp, đau nhức xương. Rối loạn quanh khớp như: viêm bao hoạt dịch, viêm gân,... Rối loạn mô mềm như: bong gân, căng gân. - Các trường hợp đau nhức khác: đau lưng. đau nhức vai, đau do chấn thương, đau đầu, bệnh gout cấp, đau bụng kinh, chứng thống kinh, đau viêm phần phụ. - Đau sau phẫu thuật, nhổ răng, cắt amiđan. - Làm giảm các triệu chứng đau, viêm có hoặc không có kèm theo sốt trong các trường hợp: do nhiễm virus, vi khuẩn (ở tai, mũi xoang, họng, nướu rắng,....). N', NULL, N'6 tháng kể từ ngày sản xuất ', N'Nơi khô, nhiệt độ không quá 30oC, tránh ánh sáng. ', N'Viên nén bao phim tan trong ruột.', N'-Không được bẻ hay nghiền viền thuốc khi uống.',200 ),
 	(N'11759/2020/ĐKSP', N'Xương khớp Sao Thái Dương ', 1, N'Việt Nam', 2, N'30viên ', 450000, N'viên', N'-Bột mịn cao hỗn hợp dược liệu (Được chiết từ các dược liệu Sinh địa; Bạch thược; Đảng sâm; Đỗ trọng; Đương quy; Bạch linh; Độc hoạt; Ngưu tất: Tang ký sinh; Tần giao; Xuyên khung; Cam thảo; Phòng phong; Quế chi; Tế tân). -Cao xương hỗn hợp. -Cao Quy bản. ', N'-Hỗ trợ thông kinh hoạt lạc, mạnh gân cốt. -Hỗ trợ giảm đau nhức mỏi xương khớp, tê bì chân tay do khí huyết ứ trệ, do thoái hóa khớp, do phong thấp.', N'-Không sử dụng Xương Khớp Thái Dương cho các đối tượng sau: -Người mẫn cảm với bất cứ thành phần nào của sản phẩm. -Phụ nữ có thai, phụ nữ đang cho con bú. ', N'24 tháng kể từ ngày sản xuất.', N'Nơi khô ráo, thoáng mát , tránh ánh nắng trực tiếp. Để xa tầm với của trẻ nhỏ', N'Viên nang', N'-Ngày uống 2-3 lần, mỗi lần 2-3 viên. -Sử dụng theo liệu trình 1-3 tháng liên tục để đạt được hiệu quả tốt. ',200),
 	(N'VD-20546-14', N'ALPHADHG ', 1, N'Việt Nam ', 3, N'10viên/vỉ x2', 20000, N'viên', N'-Hoạt chất: Chymotrypsin 21 microkatal (Tương đương 4200 USP unit). -Tá dược: Compressible sugar, magnesi stearat vừa đủ 1 viên. ', N'Điều trị phù nề sau chấn thương, phẫu thuật, bỏng. N', N'-Người lớn: Ngậm dưới lưỡi. Mỗi lần 1 - 2 viên, ngày 3 - 4 lần. -Hoặc theo chỉ dẫn của Thầy thuốc. N', N'4 tháng kể từ ngày sản xuất. ', N'Nơi khô, nhiệt độ không quá 30°C, tránh ánh sáng và ẩm. ', N'VIÊN NÉN', N'-Người lớn: Ngậm dưới lưỡi. Mỗi lần 1 - 2 viên, ngày 3 - 4 lần. -Hoặc theo chỉ dẫn của Thầy thuốc. ',200),
@@ -282,9 +284,9 @@ INSERT INTO HoaDonXuat (MaHDX, MaThuoc, MaBN, GiaBan, MaNguoiBan, SoLuongXuat, T
 	('HDX-17', 'VD-22373-15', 'BN-017', 580000, 'NV-15', 20, 5, ' ', '2021-06-09 13:30:12'),
 	('HDX-18', 'VD-30026-18', 'BN-018', 680000, 'NV-15', 5, 5, ' ', '2021-06-09 14:23:10'),
 	('HDX-19', 'VD-29750-18', 'BN-019', 85000, 'NV-15', 35, 5, ' ', '2021-06-09 15:40:11'),
-	('HDX-20', 'VN-16775-13', 'Bn-020', 270000, 'NV-15', 10, 5, ' ', '2021-06-15 14:06:56');	
+	('HDX-20', 'VN-16775-13', 'Bn-020', 270000, 'NV-15', 10, 5, ' ', '2021-06-15 14:06:56');
 
-INSERT INTO HoaDonNhap (MaHDN, NguoiGiao, MaNguoiNhan, MaThuoc, SoLuongNhap, Thue, GiaThuoc, NgayViet, NgayNhap)  VALUES 
+INSERT INTO HoaDonNhap (MaHDN, NguoiGiao, MaNguoiNhan, MaThuoc, SoLuongNhap, Thue, GiaThuoc, NgayViet, NgayNhap)  VALUES
 	('HDN-1', 'Vũ Văn Kiệt', 'NV-01', N'11759/2020/ĐKSP', 100, 450000, 10, '2022-12-14', '2023-01-14'),
 	('HDN-2', 'Nguyễn Phong Lợi', 'NV-01', N'VD-28772-18', 230, 90000, 10, '2022-12-14', '2023-01-14'),
 	('HDN-3', 'Nguyễn Phong Lợi', 'NV-02', N'VD-20546-14', 100, 18000, 10, '2022-12-14', '2023-01-14'),
@@ -306,4 +308,3 @@ INSERT INTO HoaDonNhap (MaHDN, NguoiGiao, MaNguoiNhan, MaThuoc, SoLuongNhap, Thu
 	('HDN-19', 'Nguyễn Phong Lợi', 'NV-14', N'VN-15416-12', 210, 180000, 10, ' 2022-12-14 ', ' 2023-01-14 '),
 	('HDN-20', 'Vũ Văn Kiệt', 'NV-10', N'VN-16775-13', 100, 243000, 10, ' 2022-12-14 ', ' 2023-01-14 ');
 
-	

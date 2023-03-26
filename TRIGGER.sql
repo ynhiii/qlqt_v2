@@ -1,5 +1,6 @@
 --Trigger
 --so luong thuoc se giam sau khi xuat hoa don
+USE QLQT;
 CREATE TRIGGER insert_tbl_hoaDonXuat
 ON dbo.HoaDonXuat
 AFTER INSERT
@@ -13,6 +14,7 @@ BEGIN
 END
 
 --Tự động xóa thuốc thuộc nhóm thuốc khi xóa nhóm thuốc
+USE QLQT;
 CREATE TRIGGER delete_tbl_nhom_thuoc
 ON dbo.NhomThuoc
 AFTER DELETE
@@ -23,6 +25,7 @@ END
 
 
 --Tự động update số lượng thuốc khi insert hoaDonNhap
+USE QLQT;
 CREATE TRIGGER insert_tbl_hoaDonNhap
 ON dbo.HoaDonNhap
 AFTER INSERT
